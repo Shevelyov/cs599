@@ -1,0 +1,10 @@
+extends layout
+
+block content
+    h1.
+        Items List
+    ul
+        each item, i in itemslist
+            li
+                a #{item.name}
+   // p Welcome to #{title}
