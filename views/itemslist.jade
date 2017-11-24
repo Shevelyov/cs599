@@ -1,10 +1,20 @@
-extends layout
+//extends layout
 
-block content
-    h1.
-        Items List
-    ul
-        each item, i in itemslist
-            li
-                a #{item.name}
-   // p Welcome to #{title}
+//block content
+html
+    head
+        link(href='http://localhost:3000/stylesheets/menu.css', rel='stylesheet')
+    body
+    div(id="divLogo")
+        a(href="http://localhost:3000/itemslist")
+            img(src="http://localhost:3000/images/logo.png" id="logo")
+    div(class = "products_wrapper")
+        ul(class = "products_grid")
+            each item in itemslist
+                li
+                    div(class="item")
+                        div(class="image_wrapper")
+                            img(src = "http://localhost:3000/images/" + "#{item.name}" + ".jpg" width="300" class="woocommerce-placeholder wp-post-image" height="250")
+                        div(class="desc")
+                            h1 #{item.name}
+                            span(class="price") $#{item.price}

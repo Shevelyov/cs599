@@ -1,0 +1,53 @@
+body {
+    background-image: url("http://localhost:3000/images/backgr.png");
+}
+
+div {
+    display: block;
+}
+div#divLogo{
+    background: #DCC7C2;
+}
+
+img#logo{
+    display: block;
+    margin: 0 auto;
+    width: 550px;
+    height: 150px;
+    padding-bottom: 0;
+}
+li{
+    float: left;
+    padding-left: 20px;
+}
+div.desc{
+    padding-top: 8px;
+    background: #fff;
+    padding: 15px 20px;
+    font-family: "Cooper Black";
+
+}
+span.price{
+    margin-bottom: 0;
+    font-size: 20px;
+    display: block;
+    font-weight: 400;
+}
+div.item{
+    border-color: #d3d3d3;
+    position: relative;
+    display: block;
+    margin: 0;
+    border-width: 10px;
+    border-style: solid;
+    max-width: 100%;
+    line-height: 0;
+    box-sizing: border-box;
+}
+
+.image_wrapper{
+    position: relative;
+    overflow: hidden;
+    border-color: #ff0000;
+    box-sizing: border-box;
+}
