@@ -14,6 +14,25 @@ var users = require('./routes/users');
 
 var app = express();
 
+//******************
+var RateLimit = require('express-rate-limit');
+
+//app.enable('trust proxy'); // only if you're behind a reverse proxy (Heroku, Bluemix, AWS if you use an ELB, custom Nginx setup, etc)
+
+var limiter = new RateLimit({
+    windowMs: 15*60*1000, // 15 minutes
+    //windowMs: 1,
+    delayAfter: 1,
+    max: 30, // limit each IP to X requests per windowMs
+    delayMs: 0 // disabled
+});
+
+// only apply to requests that begin with /api/
+//app.use('/api/', limiter);
+app.use(limiter);
+//*******************
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -30,7 +49,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(function(req, res, next){
     console.log("db connection...")
     req.db = db;
-    console.log(db)
+    //console.log(db)
     next();
 })
 
@@ -54,4 +73,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 module.exports = app;
