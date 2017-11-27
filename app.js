@@ -10,6 +10,7 @@ var monk = require("monk");
 var db = monk("admin:admin@ds161931.mlab.com:61931/cpp");
 
 var index = require('./routes/index');
+var itemslist = require('./routes/itemslist');
 var users = require('./routes/users');
 
 var app = express();
@@ -47,13 +48,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // make db accessible to router
 app.use(function(req, res, next){
-    console.log("db connection...")
+    //console.log("db connection...")
     req.db = db;
     //console.log(db)
     next();
 })
 
 app.use('/', index);
+app.use('/itemslist', itemslist);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
