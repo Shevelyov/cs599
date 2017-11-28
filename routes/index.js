@@ -10,32 +10,51 @@ var User = mongoose.model('MongooseUser', UserSchema, "mongooseusers");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('test', {});
 });
 
-router.post('/', function(req, res){
-    var dialog = require('dialog');
-    var db = req.db;
 
-    var name = req.body.user;
-    var pass = req.body.pass;
-
-    User.findOne({name: name, password: pass}, function(err, user){
-        if(err){
-            console.log("Error while logging in : " + err);
-            return res.render(('index', {message: err.message}));
+router.post('/', function(req, res) {
+    User.findOne({name: req.body.user, password: req.body.pass}, function (err, user) {
+        if (err) {
+            return res.status(500).send({message: err.message});
         }
 
-        if(!user){
-            console.log("Wrong user!!!!!!!!")
-            return res.render('index', {message: 'Wrong credentials, check your username or password!'});
+        // ---
+
+        if (!user) {
+            return res.status(500).send({message: 'Sorry!'});
         }
-        console.log("Here we are Mr." + user.name);
-        dialog.info('Welcome, ' + user.name + '!');
-        res.redirect('/itemslist'); 
-        //return res.render('itemslist', {message: 'Welcome back' + user.name});
-    })
-})
+
+        // ---
+
+        return res.status(200).send({message: 'Welcome back ' + user.name + '!!!'});
+    });
+});
+
+// router.post('/', function(req, res){
+//     var dialog = require('dialog');
+//     var db = req.db;
+//
+//     var name = req.body.user;
+//     var pass = req.body.pass;
+//
+//     User.findOne({name: name, password: pass}, function(err, user){
+//         if(err){
+//             console.log("Error while logging in : " + err);
+//             return res.render(('index', {message: err.message}));
+//         }
+//
+//         if(!user){
+//             console.log("Wrong user!!!!!!!!")
+//             return res.render('index', {message: 'Wrong credentials, check your username or password!'});
+//         }
+//         console.log("Here we are Mr." + user.name);
+//         dialog.info('Welcome, ' + user.name + '!');
+//         res.redirect('/itemslist');
+//         //return res.render('itemslist', {message: 'Welcome back' + user.name});
+//     })
+// })
 
 // router.post('/', function(req, res){
 //     var dialog = require('dialog');
@@ -59,4 +78,8 @@ router.post('/', function(req, res){
 //     })
 // })
 
+// {
+//     "user": {"$gt": ""},
+//     "pass": {"$gt": ""}
+// }
 module.exports = router;
