@@ -7,7 +7,10 @@ var bodyParser = require('body-parser');
 
 var mongo = require("mongodb");
 var monk = require("monk");
-var db = monk("admin:admin@ds161931.mlab.com:61931/cpp");
+var mongoose = require('mongoose');
+
+mongoose.connect("mongodb://admin:admin@ds161931.mlab.com:61931/cpp");
+var db = mongoose.connection;
 
 var index = require('./routes/index');
 var itemslist = require('./routes/itemslist');
@@ -22,8 +25,8 @@ app.set('view engine', 'jade');
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(require('body-parser').json());
+app.use(require('body-parser').urlencoded({extended: true}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
