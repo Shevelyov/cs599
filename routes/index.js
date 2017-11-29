@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var sanitize = require('mongo-sanitize');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -10,7 +11,10 @@ router.post('/', function(req, res){
     var dialog = require('dialog');
     var db = req.db;
     var collection = db.get("users");
-    collection.findOne({name: req.body.user, password: req.body.pass}, function(err, user){
+
+    //To prevent injections we can use sanitize method in mongo-santitize package - sanitize
+
+    collection.findOne({name: (req.body.user), password: (req.body.pass)}, function(err, user){
         if(err){
             console.log("Error while logging in : " + err);
             return res.render(('index', {message: err.message}));
