@@ -1,0 +1,11 @@
+body {
+    padding-top:250px;
+    background-image: url("http://localhost:3000/images/backgr.png");
+    text-align: center;
+}
+
+label, h1{
+    padding-left: 5px;
+}
+
+

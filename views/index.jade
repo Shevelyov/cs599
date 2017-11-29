@@ -1,8 +1,30 @@
-extends layout
+html
+  head
+    link(rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css")
+    link(rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css")
+    link(href='stylesheets/login.css', rel='stylesheet')
+    body
+      div(class="container")
+      div(class="col-sm-6 col-sm-offset-3")
+      h1
+        span(class="fa fa-sign-in") Login
 
-block content
-  h1 #{message}
-  form(method="POST")
-    input(type="text", name="user")
-    input(type="text", name="pass", autocomplete="off")
-    input(type="submit")
+    form(method="post")
+      div(class="form-group")
+      label Username
+        input(type="text" class="form-control" name="user")
+      div(class="form-group")
+        label Password
+          input(type="password" class="form-control" name="pass" autocomplete="off")
+      input(type="submit" class="btn btn-warning btn-lg")
+
+
+
+//extends layout
+//
+//block content
+//  h1 #{message}
+//  form(method="POST")
+//    input(type="text", name="user")
+//    input(type="text", name="pass", autocomplete="off")
+//    input(type="submit")
